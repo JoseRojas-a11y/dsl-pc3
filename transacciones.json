@@ -1,0 +1,54 @@
+{
+  "proyecto": "prj_withdrawal",
+  "total_eventos": 4,
+  "transacciones": [
+    {
+      "id": "TXN-1795157627518-001",
+      "timestamp": "2026-11-20T01:53:47-05:00",
+      "cliente": "Alice",
+      "tipo": "RETIRO",
+      "monto": 200,
+      "saldo_anterior": 234.56,
+      "saldo_nuevo": 34.56,
+      "estado": "EXITO",
+      "mensaje": "Retiro procesado correctamente",
+      "atomica": true
+    },
+    {
+      "id": "TXN-1795157627702-002",
+      "timestamp": "2026-11-20T01:53:47-05:00",
+      "cliente": "Hamza",
+      "tipo": "RETIRO",
+      "monto": 200,
+      "saldo_anterior": 198.76,
+      "saldo_nuevo": 198.76,
+      "estado": "FALLO",
+      "mensaje": "Saldo insuficiente. Intente con un monto menor",
+      "atomica": true
+    },
+    {
+      "id": "TXN-1795157627721-003",
+      "timestamp": "2026-11-20T01:53:47-05:00",
+      "cliente": "Pedro",
+      "tipo": "RETIRO",
+      "monto": -20,
+      "saldo_anterior": 300,
+      "saldo_nuevo": 300,
+      "estado": "ERROR",
+      "mensaje": "no se pueden retirar cantidades negativas",
+      "atomica": true
+    },
+    {
+      "id": "TXN-1795157627742-004",
+      "timestamp": "2026-11-20T01:53:47-05:00",
+      "cliente": "Bob",
+      "tipo": "ABONO",
+      "monto": 50,
+      "saldo_anterior": 100,
+      "saldo_nuevo": 150,
+      "estado": "EXITO",
+      "mensaje": "Abono procesado correctamente",
+      "atomica": true
+    }
+  ]
+}

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>prj_withdrawal — ATM Web</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="header-actions">
+        <span id="data-source-badge" class="pill pill-info">Fuente: datos.json</span>
+        <button id="btn-reset" type="button" class="btn btn-secondary">Reiniciar Datos</button>
+      </div>
+    </header>
+
+    <main class="dashboard-grid">
+      <!-- Panel de Cuenta y Operación -->
+      <section class="card operation-card">
+        <div class="card-header">
+          <h2>Operación Bancaria</h2>
+          <span class="pill pill-neutral">Atómica (RN-03)</span>
+        </div>
+
+        <div class="form-group">
+          <label for="select-cuenta">Titular de Cuenta</label>
+          <select id="select-cuenta"></select>
+        </div>
+
+        <div class="balance-box">
+          <span class="balance-label">Saldo Disponible</span>
+          <strong id="saldo-actual" class="balance-value">0.00 €</strong>
+        </div>
+
+        <div class="op-tabs" role="tablist">
+          <button type="button" class="op-tab active" data-op="RETIRO">Retiro de Efectivo</button>
+          <button type="button" class="op-tab" data-op="ABONO">Abono en Efectivo</button>
+        </div>
+
+        <form id="tx-form" class="tx-form" novalidate>
+          <div class="form-group">
+            <label for="input-monto">Monto (<span id="moneda-simbolo">€</span>)</label>
+            <input id="input-monto" type="number" step="0.01" placeholder="Ej. 200.00" required>
+          </div>
+
+          <div class="quick-amounts">
+            <button type="button" class="chip" data-amount="50">50</button>
+            <button type="button" class="chip" data-amount="100">100</button>
+            <button type="button" class="chip" data-amount="200">200</button>
+            <button type="button" class="chip" data-amount="-20">-20 (Error)</button>
+          </div>
+
+          <button id="btn-ejecutar" type="submit" class="btn btn-primary btn-block">
+            Ejecutar Retiro
+          </button>
+        </form>
+
+        <div id="feedback-banner" class="feedback hidden" role="status"></div>
+
+        <div class="bdd-runner">
+          <h3>Escenarios Gherkin Rápidos (BDD)</h3>
+          <div class="bdd-buttons">
+            <button type="button" class="btn btn-outline" data-bdd="alice-retiro">
+              Alice: Retiro 200 (Éxito)
+            </button>
+            <button type="button" class="btn btn-outline" data-bdd="hamza-retiro">
+              Hamza: Retiro 200 (Fallo)
+            </button>
+            <button type="button" class="btn btn-outline" data-bdd="pedro-error">
+              Pedro: Retiro -20 (Error)
+            </button>
+            <button type="button" class="btn btn-outline" data-bdd="bob-abono">
+              Bob: Abono 50 (Éxito)
+            </button>
+            <button type="button" class="btn btn-outline" data-bdd="bob-abono-fallo">
+              Bob: Abono -20 (Error)
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Panel de Integridad y Log JSON (US-04) -->
+      <section class="card log-card">
+        <div class="card-header">
+          <h2>Auditoría e Integridad (US-04)</h2>
+          <div class="log-controls">
+            <select id="filter-estado" aria-label="Filtrar por estado">
+              <option value="ALL">Todos los estados</option>
+              <option value="EXITO">EXITO</option>
+              <option value="FALLO">FALLO</option>
+              <option value="ERROR">ERROR</option>
+            </select>
+            <button id="btn-export-json" type="button" class="btn btn-secondary">Exportar JSON</button>
+          </div>
+        </div>
+
+        <div class="stats-row">
+          <div class="stat-item">
+            <span>Total</span>
+            <strong id="stat-total">0</strong>
+          </div>
+          <div class="stat-item stat-exito">
+            <span>Éxito</span>
+            <strong id="stat-exito">0</strong>
+          </div>
+          <div class="stat-item stat-fallo">
+            <span>Fallo</span>
+            <strong id="stat-fallo">0</strong>
+          </div>
+          <div class="stat-item stat-error">
+            <span>Error</span>
+            <strong id="stat-error">0</strong>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table class="tx-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Cliente</th>
+                <th>Tipo</th>
+                <th>Monto</th>
+                <th>Saldo Ant.</th>
+                <th>Saldo Nuevo</th>
+                <th>Estado</th>
+              </tr>
+            </thead>
+            <tbody id="tx-tbody">
+              <tr>
+                <td colspan="7" class="empty-row">Sin transacciones registradas aún.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="json-viewer-wrap">
+          <div class="json-viewer-header">
+            <span>Log Estructurado (JSON)</span>
+            <small>Registro inmutable de eventos</small>
+          </div>
+          <pre id="json-log-output" class="json-output">{}</pre>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,45 @@
+{
+  "proyecto": "prj_withdrawal",
+  "version": "1.3.0",
+  "moneda": "EUR",
+  "simbolo": "€",
+  "reglas_negocio": {
+    "RN-01": "No se permite realizar un retiro si el monto solicitado es mayor al saldo disponible.",
+    "RN-02": "No se permiten saldos negativos por retiros de efectivo.",
+    "RN-03": "Las transacciones deben ser atómicas (o se completa todo o no se hace nada).",
+    "US-01b": "El monto a abonar debe ser estrictamente mayor a cero."
+  },
+  "cuentas": [
+    {
+      "id": "ACC-001",
+      "nombre": "Alice",
+      "saldo": 234.56,
+      "activa": true
+    },
+    {
+      "id": "ACC-002",
+      "nombre": "Hamza",
+      "saldo": 198.76,
+      "activa": true
+    },
+    {
+      "id": "ACC-003",
+      "nombre": "Bob",
+      "saldo": 100.00,
+      "activa": true
+    },
+    {
+      "id": "ACC-004",
+      "nombre": "Carlos",
+      "saldo": 500.00,
+      "activa": true
+    },
+    {
+      "id": "ACC-005",
+      "nombre": "Pedro",
+      "saldo": 300.00,
+      "activa": true
+    }
+  ],
+  "transacciones": []
+}
